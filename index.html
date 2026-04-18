@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scout Vôlei Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🏐 Scout Vôlei</h1>
+    </header>
+
+    <main>
+        <div id="tela-menu" class="tela ativa">
+            <h3>🏐 Scout Vôlei</h3>
+            
+            <button class="btn-principal" onclick="prepararEReiniciarPartida()">▶️ Iniciar Nova Partida</button>
+
+            <button class="btn-principal" onclick="mudarTela('tela-partida')" style="height: 35px;  ">▶️ Continuar Partida</button>
+    
+            
+    
+            <hr>
+            <button class="btn-secundario" onclick="mudarTela('tela-jogadores')">👥 Gerenciar Time</button>
+            <button class="btn-secundario" onclick="prepararSelecaoRelatorio()">💾 Baixar Relatório (TXT)</button>
+        </div>
+
+        <div id="tela-selecao-relatorio" class="tela">
+            <h2>Selecionar Jogadores para o TXT</h2>
+            <div id="lista-selecao-relatorio" class="lista-container">
+            </div>
+            <button class="btn-exportar" onclick="gerarRelatorioFiltrado()">📥 Gerar Arquivo TXT</button>
+            <button class="btn-voltar" onclick="mudarTela('tela-menu')">Cancelar</button>
+        </div>
+
+        <div id="tela-selecao-elenco" class="tela">
+            <h3>Escalação da Partida</h3>
+            <p>Quem vai para o jogo?</p>
+    
+            <div id="selecao-jogadores-partida" class="lista-selecao">
+            </div>
+
+            <button class="btn-principal" onclick="confirmarEscalacao()">✅ Confirmar e Ir para Quadra</button>
+            <button class="btn-voltar" onclick="mudarTela('tela-menu')">Cancelar</button>
+        </div>
+        <div id="tela-jogadores" class="tela">
+            <h3>Base de Jogadores</h3>
+            <div class="formulario">
+                <input type="text" id="inputNome" placeholder="Nome do Jogador">
+                <button class="btn-add" onclick="adicionarJogador()">Adicionar</button>
+            </div>
+            
+            <div id="lista-base-jogadores" class="lista-container">
+                </div>
+            <button class="btn-voltar" onclick="mudarTela('tela-menu')">⬅️ Voltar ao Menu</button>
+        </div>
+
+        <div id="tela-detalhes" class="tela">
+            <h3>Estatísticas de Carreira</h3>
+            <h2 id="detalhe-nome-jogador">Nome</h2>
+            <div id="corpo-estatisticas" style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px;">
+            </div>
+            <button class="btn-voltar" onclick="mudarTela('tela-jogadores')">Voltar</button>
+        </div>
+
+        <div id="tela-partida" class="tela">
+            <div class="placar">
+                </div>
+
+            <div id="quadra-jogadores" class="grid-jogadores">
+                </div>
+
+            <hr>
+            <button onclick="desfazerUltimaAcao()" style="background-color: #7a8eff; margin-bottom: 20px;">
+                ↩️ Desfazer Último Lance
+            </button>
+
+            <button class="btn-sair" onclick="mudarTela('tela-menu')">⏱️ Sair do Jogo</button>
+        </div>
+
+        <div id="tela-acoes" class="tela">
+    <header>
+        <h2 id="titulo-acoes">Jogador: Selecionado</h2>
+    </header>
+
+    <div class="container-acoes">
+        <div class="grupo-scout">
+            <h4>SAQUE</h4>
+            <div class="grid-botoes-scout">
+                <button class="btn-ponto" onclick="registrarAcao('saque_ace')">ACE (Ponto)</button>
+                <button class="btn-erro" onclick="registrarAcao('saque_erro')">ERRO</button>
+                <button class="btn-neutro" onclick="registrarAcao('saque_normal')">EM JOGO</button>
+            </div>
+        </div>
+
+        <div class="grupo-scout">
+            <h4>ATAQUE</h4>
+            <div class="grid-botoes-scout">
+                <button class="btn-ponto" onclick="registrarAcao('ataque_ponto')">PONTO</button>
+                <button class="btn-erro" onclick="registrarAcao('ataque_erro')">ERRO</button>
+                <button class="btn-neutro" onclick="registrarAcao('ataque_bloqueado')">BLOQUEADO</button>
+                <button class="btn-neutro" onclick="registrarAcao('ataque_trabalhado')">PINGADA</button>
+            </div>
+        </div>
+
+        <div class="grupo-scout">
+            <h4>BLOQUEIO</h4>
+            <div class="grid-botoes-scout">
+                <button class="btn-ponto" onclick="registrarAcao('bloqueio_ponto')">PONTO</button>
+                <button class="btn-neutro" onclick="registrarAcao('bloqueio_amortecido')">AMORTECEU</button>
+                <button class="btn-erro" onclick="registrarAcao('bloqueio_erro')">ERRO</button>
+            
+            </div>
+        </div>
+
+        <div class="grupo-scout">
+            <h4>RECEPÇÃO</h4>
+            <div class="grid-botoes-scout">
+                <button class="btn-ponto" onclick="registrarAcao('recepcao_excelente')">A (Na mão)</button>
+                <button class="btn-neutro" onclick="registrarAcao('recepcao_positiva')">B (Perto)</button>
+                <button class="btn-erro" onclick="registrarAcao('recepcao_erro')">ERRO (Ace)</button>
+            </div>
+        </div>
+
+        <div class="grupo-scout">
+            <h4>LEVANTAMENTO</h4>
+            <div class="grid-botoes-scout">
+                <button class="btn-neutro" onclick="registrarAcao('levantamento_preciso')">PRECISO</button>
+                <button class="btn-erro" onclick="registrarAcao('levantamento_erro')">ERRO</button>
+                <button class="btn-atacavel" onclick="registrarAcao('levantamento_atacavel')">ATACAVEL</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-voltar" onclick="mudarTela('tela-partida')" style="background-color: #666; margin-top: 15px;">
+        ⬅️ VOLTAR (CANCELAR)
+    </button>
+    </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

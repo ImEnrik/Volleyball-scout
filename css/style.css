@@ -1,0 +1,140 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    background-color: #1e3a8a; /* Azul escuro vôlei */
+    color: white;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Controle de Telas */
+.tela {
+    display: none;
+    width: 90%;
+    max-width: 400px;
+    background: white;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.ativa {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botões */
+button {
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.1s;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+.btn-principal {
+    background-color: #3b82f6;
+    color: white;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Lista de Jogadores */
+.item-jogador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border-left: 5px solid #3b82f6;
+}
+
+.grid-jogadores {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dois jogadores por linha */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-jogador-quadra {
+    background-color: #f39c12; /* Cor de bola de vôlei */
+    color: white;
+    height: 65px; /* Botão alto para facilitar o toque */
+    padding: 150;
+    font-size: 15px;
+}
+
+.grupo-botoes {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.grupo-botoes h4 { margin: 5px 0; color: #555; }
+
+.btn-desfazer {
+    background-color: #f39c12; /* Laranja */
+    color: white;
+    font-size: 14px;
+    margin-top: 15px;
+    border: 2px dashed rgba(255,255,255,0.5); /* Um detalhe para diferenciar */
+}
+
+.container-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.grupo-scout {
+    background: #fdfdfd;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.grupo-scout h4 {
+    margin: 0 0 8px 0;
+    color: #1e3a8a;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.grid-botoes-scout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* 3 botões por linha */
+    gap: 10px;
+}
+
+.grid-botoes-scout button {
+    height: 55px; /* Altura boa para o polegar */
+    font-size: 12px;
+    padding: 2px;
+}
+
