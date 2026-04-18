@@ -4,6 +4,26 @@ let jogadorAtivoIndex = null;
 let historicoAcoes = [];
 
 // --- NAVEGAÇÃO ---
+
+function carregarDados() {
+    // 1. Tenta buscar o que está guardado na memória do celular
+    const dadosSalvos = localStorage.getItem('meuScoutVolei');
+
+    // 2. Se encontrar algo (se não for nulo)
+    if (dadosSalvos) {
+        // 3. Converte de texto (JSON) de volta para uma lista de objetos
+        bancoJogadores = JSON.parse(dadosSalvos);
+        console.log("Dados carregados com sucesso!");
+    } else {
+        console.log("Nenhum dado encontrado na memória.");
+    }
+}
+
+// 4. EXECUÇÃO IMEDIATA:
+// Isso faz o app ler o banco assim que o arquivo JS é lido pelo celular
+carregarDados();
+
+
 function mudarTela(idDaTela) {
     const telas = document.querySelectorAll('.tela');
     telas.forEach(t => t.classList.remove('ativa'));
@@ -48,9 +68,33 @@ function adicionarJogador() {
 
     bancoJogadores.push(novoJogador);
     salvarDados();
+    renderizarListaBase();
     nomeInput.value = "";
     atualizarListaBase();
     alert(`${nome} adicionado com sucesso!`);
+    
+}
+
+// --- FUNÇÃO QUE DESENHA A LISTA NO HTML ---
+function renderizarListaBase() {
+    // O 'lista-jogadores-base' deve ser o ID da <div> no seu HTML onde os nomes aparecem
+    const container = document.getElementById('lista-jogadores-base'); 
+    
+    if (!container) return; // Segurança caso o elemento não exista na tela atual
+
+    container.innerHTML = ''; // Limpa tudo para redesenhar do zero
+
+        bancoJogadores.forEach(j => {
+        // Dentro do forEach da lista de jogadores:
+        container.innerHTML += `
+        <div class="linha-jogador-base">
+                <span><i class="fas fa-user"></i> ${j.nome}</span>
+        
+        <button class="btn-remover-icone" onclick="removerJogador(${j.id})">
+            <i class="fas fa-trash-alt"></i> </button>
+        </div>
+        `;
+    });
 }
 
 function atualizarListaBase() {
@@ -110,9 +154,6 @@ function registrarAcao(tipo) {
     }
 }
 // --- UTILITÁRIOS ---
-function salvarDados() {
-    localStorage.setItem('banco_jogadores', JSON.stringify(bancoJogadores));
-}
 
 function calcularTotalPontos(jogador) {
     return jogador.stats.ataque_ponto + jogador.stats.saque_ace + jogador.stats.bloqueio_ponto;
@@ -123,6 +164,7 @@ function removerJogador(id) {
         bancoJogadores = bancoJogadores.filter(j => j.id !== id);
         salvarDados();
         atualizarListaBase();
+        renderizarListaBase();
     }
 }
 
@@ -393,3 +435,18 @@ function gerarRelatorioFiltrado() {
     alert("Relatório gerado com sucesso!");
     mudarTela('tela-menu');
 }
+
+function salvarDados() {
+    localStorage.setItem('meuScoutVolei', JSON.stringify(bancoJogadores));
+}
+
+window.addEventListener('load', () => {
+    // 5000 milissegundos = 5 segundos
+    setTimeout(() => {
+        const splash = document.getElementById('splash-screen');
+        splash.classList.add('hidden-splash');
+        
+        // Opcional: Tocar um som sutil de apito ou apenas liberar a tela
+        console.log("App Pronto!");
+    }, 5000);
+});

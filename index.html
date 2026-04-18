@@ -5,33 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scout Vôlei Pro</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="apple-touch-icon" href="download.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
-    <header>
-        <h1>🏐 Scout Vôlei</h1>
+<div id="splash-screen">
+    <div class="splash-content">
+        <div class="volleyball-icon">
+            <i class="fas fa-volleyball-ball"></i>
+        </div>
+        <h1>VÔLEI PRO</h1>
+        <h12>scout</h12>
+        <br>
+        <p class="letra-pequena">Carregando estatísticas...</p>
+    
+        <div class="loader-bar"></div>
+    </div>
+</div>
+    <header> 
+        <h1>VÔLEI PRO</h1>
+        <h12><i class="fas fa-volleyball-ball"></i>  scout  <i class="fas fa-volleyball-ball"></i></h12>
     </header>
 
     <main>
         <div id="tela-menu" class="tela ativa">
-            <h3>🏐 Scout Vôlei</h3>
+            <h3> Scout menu</h3>
             
-            <button class="btn-principal" onclick="prepararEReiniciarPartida()">▶️ Iniciar Nova Partida</button>
+            <button class="btn-principal" onclick="prepararEReiniciarPartida()"><i class="fas fa-play"></i> Iniciar Partida</button>
 
-            <button class="btn-principal" onclick="mudarTela('tela-partida')" style="height: 35px;  ">▶️ Continuar Partida</button>
+            <button class="btn-principal" onclick="mudarTela('tela-partida')" style="height: 35px;  "><i class="fas fa-play"></i> Continuar Partida</button>
     
             
     
             <hr>
-            <button class="btn-secundario" onclick="mudarTela('tela-jogadores')">👥 Gerenciar Time</button>
-            <button class="btn-secundario" onclick="prepararSelecaoRelatorio()">💾 Baixar Relatório (TXT)</button>
+            <button class="btn-secundario" onclick="mudarTela('tela-jogadores')" style="color: #000000;">👥 Gerenciar Time</button>
+            <button class="btn-secundario" onclick="prepararSelecaoRelatorio()" style="color: #000000;">💾 Baixar Relatório</button>
+            <h30 class="letra-pequena">product by Enrik</h30>
         </div>
 
         <div id="tela-selecao-relatorio" class="tela">
             <h2>Selecionar Jogadores para o TXT</h2>
             <div id="lista-selecao-relatorio" class="lista-container">
             </div>
-            <button class="btn-exportar" onclick="gerarRelatorioFiltrado()">📥 Gerar Arquivo TXT</button>
+            <button class="btn-exportar" onclick="gerarRelatorioFiltrado()"><i class="fas fa-file-export"></i>Exportar</button>
             <button class="btn-voltar" onclick="mudarTela('tela-menu')">Cancelar</button>
         </div>
 
@@ -49,18 +65,18 @@
             <h3>Base de Jogadores</h3>
             <div class="formulario">
                 <input type="text" id="inputNome" placeholder="Nome do Jogador">
-                <button class="btn-add" onclick="adicionarJogador()">Adicionar</button>
+                <button class="btn-add" onclick="adicionarJogador()" style="color: #000000;">Adicionar</button>
             </div>
             
             <div id="lista-base-jogadores" class="lista-container">
                 </div>
-            <button class="btn-voltar" onclick="mudarTela('tela-menu')">⬅️ Voltar ao Menu</button>
+            <button class="btn-voltar" onclick="mudarTela('tela-menu')">⬅ Voltar ao Menu</button>
         </div>
 
         <div id="tela-detalhes" class="tela">
             <h3>Estatísticas de Carreira</h3>
             <h2 id="detalhe-nome-jogador">Nome</h2>
-            <div id="corpo-estatisticas" style="text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px;">
+            <div id="corpo-estatisticas" style="text-align: left; color: #000000; background: #f9f9f9; padding: 15px; border-radius: 10px;">
             </div>
             <button class="btn-voltar" onclick="mudarTela('tela-jogadores')">Voltar</button>
         </div>
@@ -74,10 +90,10 @@
 
             <hr>
             <button onclick="desfazerUltimaAcao()" style="background-color: #7a8eff; margin-bottom: 20px;">
-                ↩️ Desfazer Último Lance
+                ↩ Desfazer Último Lance
             </button>
 
-            <button class="btn-sair" onclick="mudarTela('tela-menu')">⏱️ Sair do Jogo</button>
+            <button class="btn-sair" onclick="mudarTela('tela-menu')" style="color: #000000;">⏱ Sair do Jogo</button>
         </div>
 
         <div id="tela-acoes" class="tela">
@@ -89,28 +105,28 @@
         <div class="grupo-scout">
             <h4>SAQUE</h4>
             <div class="grid-botoes-scout">
-                <button class="btn-ponto" onclick="registrarAcao('saque_ace')">ACE (Ponto)</button>
-                <button class="btn-erro" onclick="registrarAcao('saque_erro')">ERRO</button>
-                <button class="btn-neutro" onclick="registrarAcao('saque_normal')">EM JOGO</button>
+                <button class="btn-ponto" onclick="registrarAcao('saque_ace')" style="color: #000000;">ACE (Ponto)</button>
+                <button class="btn-erro" onclick="registrarAcao('saque_erro')" style="color: #000000;">ERRO</button>
+                <button class="btn-neutro" onclick="registrarAcao('saque_normal')" style="color: #000000;">EM JOGO</button>
             </div>
         </div>
 
         <div class="grupo-scout">
             <h4>ATAQUE</h4>
             <div class="grid-botoes-scout">
-                <button class="btn-ponto" onclick="registrarAcao('ataque_ponto')">PONTO</button>
-                <button class="btn-erro" onclick="registrarAcao('ataque_erro')">ERRO</button>
-                <button class="btn-neutro" onclick="registrarAcao('ataque_bloqueado')">BLOQUEADO</button>
-                <button class="btn-neutro" onclick="registrarAcao('ataque_trabalhado')">PINGADA</button>
+                <button class="btn-ponto" onclick="registrarAcao('ataque_ponto')" style="color: #000000;">PONTO</button>
+                <button class="btn-erro" onclick="registrarAcao('ataque_erro')" style="color: #000000;">ERRO</button>
+                <button class="btn-neutro" onclick="registrarAcao('ataque_bloqueado')" style="color: #000000;">BLOQUEADO</button>
+                <button class="btn-neutro" onclick="registrarAcao('ataque_trabalhado')" style="color: #000000;">PINGADA</button>
             </div>
         </div>
 
         <div class="grupo-scout">
             <h4>BLOQUEIO</h4>
             <div class="grid-botoes-scout">
-                <button class="btn-ponto" onclick="registrarAcao('bloqueio_ponto')">PONTO</button>
-                <button class="btn-neutro" onclick="registrarAcao('bloqueio_amortecido')">AMORTECEU</button>
-                <button class="btn-erro" onclick="registrarAcao('bloqueio_erro')">ERRO</button>
+                <button class="btn-ponto" onclick="registrarAcao('bloqueio_ponto')" style="color: #000000;">PONTO</button>
+                <button class="btn-neutro" onclick="registrarAcao('bloqueio_amortecido')" style="color: #000000;">AMORTECEU</button>
+                <button class="btn-erro" onclick="registrarAcao('bloqueio_erro')" style="color: #000000;">ERRO</button>
             
             </div>
         </div>
@@ -118,18 +134,18 @@
         <div class="grupo-scout">
             <h4>RECEPÇÃO</h4>
             <div class="grid-botoes-scout">
-                <button class="btn-ponto" onclick="registrarAcao('recepcao_excelente')">A (Na mão)</button>
-                <button class="btn-neutro" onclick="registrarAcao('recepcao_positiva')">B (Perto)</button>
-                <button class="btn-erro" onclick="registrarAcao('recepcao_erro')">ERRO (Ace)</button>
+                <button class="btn-ponto" onclick="registrarAcao('recepcao_excelente')" style="color: #000000;">A (Na mão)</button>
+                <button class="btn-neutro" onclick="registrarAcao('recepcao_positiva')" style="color: #000000;">B (Perto)</button>
+                <button class="btn-erro" onclick="registrarAcao('recepcao_erro')" style="color: #000000;">ERRO (Ace)</button>
             </div>
         </div>
 
         <div class="grupo-scout">
             <h4>LEVANTAMENTO</h4>
             <div class="grid-botoes-scout">
-                <button class="btn-neutro" onclick="registrarAcao('levantamento_preciso')">PRECISO</button>
-                <button class="btn-erro" onclick="registrarAcao('levantamento_erro')">ERRO</button>
-                <button class="btn-atacavel" onclick="registrarAcao('levantamento_atacavel')">ATACAVEL</button>
+                <button class="btn-neutro" onclick="registrarAcao('levantamento_preciso')" style="color: #000000;">PRECISO</button>
+                <button class="btn-erro" onclick="registrarAcao('levantamento_erro')" style="color: #000000;">ERRO</button>
+                <button class="btn-atacavel" onclick="registrarAcao('levantamento_atacavel')" style="color: #000000;">ATACAVEL</button>
             </div>
         </div>
     </div>
